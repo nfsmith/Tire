@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdxymopohhven"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tg3sw"]
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 414.0
+offset_right = 844.0
+offset_bottom = 614.0
+color = Color(0, 0, 0, 0.215686)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 21.0
+offset_right = 118.0
+offset_bottom = 44.0
+text = "Hey man... "
+label_settings = SubResource("LabelSettings_tg3sw")
+
+[node name="Continue" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 160.0
+offset_right = 384.0
+offset_bottom = 183.0
+text = "SPACE to continue"

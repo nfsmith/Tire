@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3q7ipmvyprhk"]
+
+[ext_resource type="Script" path="res://StartMenu.gd" id="1_wyc0h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_33h3g"]
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wyc0h")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 76.0
+offset_right = 472.0
+offset_bottom = 213.0
+text = "Tire"
+label_settings = SubResource("LabelSettings_33h3g")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 385.0
+offset_right = 604.0
+offset_bottom = 416.0
+text = "Play"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

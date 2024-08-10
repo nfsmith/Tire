@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlr7u1ghmrepc"]
+
+[ext_resource type="Script" path="res://tire.gd" id="1_bdqjs"]
+[ext_resource type="Script" path="res://TireOrb.gd" id="2_l4fhy"]
+[ext_resource type="Script" path="res://Camera_Controller.gd" id="2_y4ulv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_06v70"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hv4p1"]
+albedo_color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oqssy"]
+material = SubResource("StandardMaterial3D_hv4p1")
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmnao"]
+albedo_color = Color(0.724773, 0.350653, 1.92523e-07, 1)
+
+[node name="Tire" type="Node3D"]
+script = ExtResource("1_bdqjs")
+power = 100
+
+[node name="TireOrb" type="RigidBody3D" parent="."]
+mass = 45.0
+gravity_scale = 1.5
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("2_l4fhy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TireOrb"]
+shape = SubResource("SphereShape3D_06v70")
+
+[node name="Camera_Controller" type="Node3D" parent="TireOrb" node_paths=PackedStringArray("target")]
+transform = Transform3D(-0.535665, 0, -0.844431, 0, 1, 0, 0.844431, 0, -0.535665, 1.91749, 0, -1.24628)
+top_level = true
+script = ExtResource("2_y4ulv")
+target = NodePath("../../Forward")
+lerp_ratio = 0.3
+
+[node name="Camera_Target" type="Node3D" parent="TireOrb/Camera_Controller"]
+transform = Transform3D(1, 0, 0, 0, 0.924307, 0.381651, 0, -0.381651, 0.924307, 0, 1.74104, 3.83672)
+
+[node name="Camera3D" type="Camera3D" parent="TireOrb/Camera_Controller/Camera_Target"]
+
+[node name="Forward" type="Marker3D" parent="."]
+top_level = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Forward"]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_oqssy")
+skeleton = NodePath("../../TireOrb")
+
+[node name="Arrow" type="CSGPolygon3D" parent="Forward"]
+transform = Transform3D(0.3, 0, 0, 0, -2.62268e-08, 0.5, 0, -0.6, -2.18557e-08, -0.15, 0, -1.5)
+polygon = PackedVector2Array(0, 0, 0, 1, -1, 1, 0.5, 2, 2, 1, 1, 1, 1, 0)
+depth = 0.29
+material = SubResource("StandardMaterial3D_cmnao")

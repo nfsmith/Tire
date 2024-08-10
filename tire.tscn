@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7en7mwb61av7"]
+
+[ext_resource type="Script" path="res://tire.gd" id="1_ay8r8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r5lds"]
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1a3g2"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7gfnx"]
+height = 0.3
+
+[node name="Tire" type="VehicleBody3D"]
+mass = 1.0
+engine_force = 1024.0
+script = ExtResource("1_ay8r8")
+
+[node name="Wheel" type="VehicleWheel3D" parent="."]
+engine_force = 1024.0
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 1.0
+wheel_friction_slip = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_r5lds")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_1a3g2")
+
+[node name="Camera_Controller" type="Node3D" parent="."]
+top_level = true
+
+[node name="Camera_Target" type="Node3D" parent="Camera_Controller"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.25882, 3.96593)
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Controller/Camera_Target"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-3.93403e-08, -0.9, 0, 0.9, -3.93403e-08, 0, 0, 0, 0.9, 0, 0, 0)
+shape = SubResource("CylinderShape3D_7gfnx")
